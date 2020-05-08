@@ -64,7 +64,7 @@ class SignUp extends React.Component {
             name='displayName'
             type='text'
             value={displayName}
-            label='displayName'
+            label='Name'
             required
           />
           <FormInput
@@ -72,7 +72,7 @@ class SignUp extends React.Component {
             name='email'
             type='email'
             value={email}
-            label='email'
+            label='Email'
             required
           />
           <FormInput
@@ -80,7 +80,7 @@ class SignUp extends React.Component {
             name='password'
             type='password'
             value={password}
-            label='password'
+            label='Password'
             required
           />
           <FormInput
@@ -88,7 +88,7 @@ class SignUp extends React.Component {
             name='confirmPassword'
             type='password'
             value={confirmPassword}
-            label='confirmPassword'
+            label='Confirm Password'
             required
           />
           <CustomButton type='submit'>SIGN UP</CustomButton>
