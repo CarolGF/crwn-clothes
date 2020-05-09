@@ -11,7 +11,7 @@ import CartIcon from "../Cart-Icon/Cart-Icon";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import "./Header.scss";
 
-const Header = ({ currentUser, hidden }) => {
+const Header = ({ currentUser, hidden, dispatch }) => {
   return (
     <div className='header'>
       <Link to='/' className='logo-container'>
