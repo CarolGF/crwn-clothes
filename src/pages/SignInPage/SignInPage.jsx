@@ -4,13 +4,11 @@ import SignIn from "../../components/Sign-In/Sign-In";
 import SignUp from "../../components/Sign-Up/Sign-Up";
 import { SignInPageContainer } from "./SignInPage-styles";
 
-const SignInPage = () => {
-  return (
-    <SignInPageContainer>
-      <SignIn />
-      <SignUp />
-    </SignInPageContainer>
-  );
-};
+const SignInPage = () => (
+  <SignInPageContainer>
+    <SignIn />
+    <SignUp />
+  </SignInPageContainer>
+);
 
 export default SignInPage;

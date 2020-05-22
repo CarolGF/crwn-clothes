@@ -1,5 +1,6 @@
 import React from "react";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { connect } from "react-redux";
+import { signUpStart } from "../../redux/user/user-actions";
 
 import FormInput from "../Form-Input/Form-Input";
 import CustomButton from "../Custom-Button/Custom-Button";
@@ -20,6 +21,7 @@ class SignUp extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
+    const { signUpStart } = this.props;
     const { displayName, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
@@ -27,27 +29,11 @@ class SignUp extends React.Component {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await createUserProfileDocument(user, { displayName });
-
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      alert(error.message);
-    }
+    signUpStart({ displayName, email, password });
   };
 
   handleChange = (event) => {
-    const { value, name } = event.target;
+    const { name, value } = event.target;
 
     this.setState({ [name]: value });
   };
@@ -60,7 +46,7 @@ class SignUp extends React.Component {
         <span>Sign up with your email and password</span>
         <form onSubmit={this.handleSubmit} className='sign-up-form'>
           <FormInput
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             name='displayName'
             type='text'
             value={displayName}
@@ -68,7 +54,7 @@ class SignUp extends React.Component {
             required
           />
           <FormInput
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             name='email'
             type='email'
             value={email}
@@ -76,7 +62,7 @@ class SignUp extends React.Component {
             required
           />
           <FormInput
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             name='password'
             type='password'
             value={password}
@@ -84,7 +70,7 @@ class SignUp extends React.Component {
             required
           />
           <FormInput
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             name='confirmPassword'
             type='password'
             value={confirmPassword}
@@ -98,4 +84,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  signUpStart: (userCredentials) => dispatch(signUpStart(userCredentials)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);
